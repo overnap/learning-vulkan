@@ -213,7 +213,7 @@ private:
             throw std::runtime_error("failed to find GPUs with Vulkan support");
         }
 
-        std::vector<VkPhysicalDevice> devices;
+        std::vector<VkPhysicalDevice> devices(deviceCount);
         vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
         for (const auto &device : devices) {
             if (isDeviceSuitable(device)) {
@@ -251,7 +251,7 @@ private:
 
         uint32_t queueFamilyCount = 0;
         vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
-        std::vector<VkQueueFamilyProperties> queueFamilies;
+        std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
         vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
 
         int i = 0;
